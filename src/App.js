@@ -1,15 +1,16 @@
-// import "./App.css";
+ import "./App.css";
 
 import React,{ useState } from "react";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import Alert from "./components/Alert";
-// import About from "./components/About";
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route,
-// } from "react-router-dom";
+import About from "./components/About";
+import Error from "./components/Error";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -45,7 +46,7 @@ function App() {
   };
   return (
     <>
-    {/* <Router> */}
+    <Router>
       <Navbar
         title="TextUtils"
         mode={mode}
@@ -54,22 +55,19 @@ function App() {
       />
       <Alert alert={alert} />
       <div className="container">
-      {/* <Routes> */} 
+      <Routes> 
         {/* /users-->components1 using exact for exact location
         /users/home-->components2 */}
-      {/* <Route exact path="/about">
-            <About/>
-        </Route>
-          <Route exact path="/"> */}
-          <TextForm
-          showAlert={showAlert}
-          heading="Enter the text to analyze Below"
-          mode={mode}
-        />
-          {/* </Route>
-        </Routes> */}
+      <Route exact path="/about" element={<About mode={mode}/>}/>
+
+      <Route exact path="/" element={<TextForm showAlert={showAlert}
+        heading="Enter the text to analyze : "
+        mode={mode}/>}/>
+  
+      <Route exact path="*" element={<Error/>}/>
+      </Routes>
       </div>
-       {/* </Router> */}
+       </Router>
     </>
   );
 }
